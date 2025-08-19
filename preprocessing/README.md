@@ -15,11 +15,15 @@ Folder Structure is as follows:
 
 ## Steps
 
-### Bipolar Rereferencing (`preprocessing.ipynb`)
+### Bipolar Rereferencing 
+
+Main scripts: (`preprocessing.ipynb`)
 
 Pretty self explanatory.
 
-### Individual Subject Time-locking Analyses (`trial_onset.ipynb`, `first_move.ipynb`, `first_dot.ipynb`, `last_away.ipynb`, `ghost_attack.ipynb`, `trial_end.ipynb`)
+### Individual Subject Time-locking Analyses 
+
+Main scripts: (`trial_onset.ipynb`, `first_move.ipynb`, `first_dot.ipynb`, `last_away.ipynb`, `ghost_attack.ipynb`, `trial_end.ipynb`)
 
 I then calculate the TFRs based on 6 different events. These scripts generally follow the same format, but I seperate some of the TFRs based on different conditions as is relevant to the specific event. 
 
@@ -36,11 +40,15 @@ time_bin = n_cycles / freqs / np.pi
 
 ```
 
+These scripts heavily rely on the helper function in `preproc_functions.py` and the subject:electrode:region dictionary in `roi.py`
+
 ## Baselining
 
 For baselining, I am currently log-transforming the TFR, and then z-scoring within each trial, channel, and frequnecy band.
 
 ### Freq Power Csvs
+
+Main scripts: `./scripts/export_iti_baselined_csvs.ipynb`
 
 Along with calculating the TFR I also average frequency power within the given frequency bands and save out to cvs. Here is the information relevant frequency-specific information.
 
