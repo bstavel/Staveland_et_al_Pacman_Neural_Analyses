@@ -1,18 +1,50 @@
-# Data Cleaning Steps
+# Raw Data Processing
 
-1. create new subject-specific cleaning notebook
-2. Load data as appropriate for that data type
-3. Find photodiode channel by loading the header
-4. Find relevant task window of interest
-5. Use that time window to define the trial before loading full dataset with all trials
-6. Schedule meeting with Bob to clean data
-7. Before cleaning session, open the elctrode notes and pdf and load the recon (if available)
-8. Save notes from cleaning session in the jupyter notebook
+This folder contains scripts for initial data conversion and cleaning of intracranial EEG recordings from the Pacman task.
 
+## Folder Structure
 
+* `./SUBJECT/scripts/`: Subject-specific scripts for data conversion and cleaning
+* `./scripts/`: Template scripts for data processing pipeline
 
-## Subjects
+## Processing Pipeline
 
+### 1. Data Conversion (`bci_to_fif.ipynb` or `conversion2fif_*.ipynb`)
+
+Converts raw BCI2000 data files to MNE-compatible FIF format:
+- Loads signals, states, and parameters from BCI2000 `.dat` files
+- Creates MNE info structure with channel names and sampling rate
+- Adds photodiode/trial timing as stimulus channel
+- Saves as `{subject}_raw_ieeg.fif`
+
+### 2. Behavioral State Extraction (`states_to_csv.ipynb` or `states2csv_*.ipynb`)
+
+Extracts behavioral data from BCI2000 states for task analysis:
+- Samples states at 50ms intervals to match behavioral sampling
+- Includes: trial number, timing, ghost/user locations, direction, biscuits, attack states, score, lives
+- Filters to task period and numbers trials sequentially
+- Saves as `{subject}_raw_behave.csv`
+
+### 3. Data Cleaning (`cleaning.ipynb` or `cleaning_*.ipynb`)
+
+Performs artifact removal and preprocessing:
+- **Filtering**: Bandpass filter (1-150 Hz), notch filter at 60Hz harmonics
+- **Channel rejection**: Removes epileptic channels, noisy channels, non-iEEG channels (EKG, REF, EMPTY)
+- **Epoch rejection**: Marks bad epochs from visual inspection
+- **Bad trial exclusion**: Removes paused trials and trials without biscuits from behavioral analysis
+- Saves cleaned versions: `{subject}_raw_clean_ieeg.fif` and `{subject}_notched_filtered_clean_ieeg.fif`
+
+## Outputs
+
+- **FIF files**: MNE-compatible neural data files for preprocessing pipeline
+- **CSV files**: Behavioral state data for alignment with neural analyses
+- **Annotations**: Bad epochs and channels marked for exclusion
+
+## Subject-Specific Notes
+
+Cleaning notes documenting epileptic channels, noisy channels, and bad epochs are preserved in individual subject sections below for reference.
+
+[Original subject notes preserved below...]
 
 #### BJH017
 
