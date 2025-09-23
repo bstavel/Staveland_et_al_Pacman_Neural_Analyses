@@ -39,6 +39,9 @@ The pipeline processes iEEG recordings from multiple subjects, computing time-fr
 - Generates publication-ready figures and statistical summaries
 - Outputs: Grand average TFRs, statistical cluster maps, and group visualizations
 
+### Run Time
+For one patient with an average number of electrodes, processing all steps, including the construction of null distributions, should be under two weeks.
+
 ## Installation
 
 ### Requirements
