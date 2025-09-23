@@ -64,6 +64,9 @@ pip install -r requirements.txt
 - **mat73/h5io**: File I/O for MATLAB and HDF5 formats
 - **BCI2kReader**: Reading BCI2000 data format
 
+### Install time (for repo)
+Under 5 minutes, assuming main dependencies are already installed
+
 ## Data Flow
 
 ```
